@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "http-server . --port=9003 -o"
+    "start": "http-server . --port=9003 --cors -o"
   },
   "author": "",
   "license": "ISC",

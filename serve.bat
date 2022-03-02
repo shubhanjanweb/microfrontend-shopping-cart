@@ -3,10 +3,6 @@ cd app-shell-root-config
 start serve
 cd..
 ECHO "app-shell-root-config server started..."
-cd app-shell-root-config 
-start serve
-cd..
-ECHO "app-shell-root-config server started..."
 cd react-components\top-header
 start serve
 cd..
