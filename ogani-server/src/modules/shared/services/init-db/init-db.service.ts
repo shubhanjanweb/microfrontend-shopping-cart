@@ -7,6 +7,8 @@ import { CategoryEntity } from 'src/modules/product/entities/category.entity';
 import { ProductEntity } from 'src/modules/product/entities/product.entity';
 import { CategoryService } from 'src/modules/product/services/category.service';
 import { ProductService } from 'src/modules/product/services/product.service';
+import { UserDto } from 'src/modules/user/controllers/dto/user.dto';
+import { UserService } from 'src/modules/user/services/user.service';
 import { Repository } from 'typeorm';
 
 @Injectable()
@@ -14,12 +16,29 @@ export class InitDbService {
   constructor(
     private productService: ProductService,
     private categoryService: CategoryService,
-
+    private userService: UserService
   ) { }
 
   onModuleInit() {
     this.initCategory();
     this.initProduct();
+    this.initUser();
+  }
+
+  private async initUser(): Promise<void> {
+    const user: UserDto = {
+      emailId: 'admin@ogani.com',
+      fullName: 'Admin At Ogani',
+      mobileNumber: '1234567890',
+      password: 'password',
+      photoUrl: 'https://i.pravatar.cc/300',
+      type: 'admin',
+      userName: 'admin'
+    }
+    const isExist = await this.userService.count();
+    if (!isExist) {
+      await this.userService.createUser(user);
+    }
   }
 
   private async initCategory(): Promise<void> {

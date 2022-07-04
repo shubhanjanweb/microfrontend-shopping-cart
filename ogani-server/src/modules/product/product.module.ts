@@ -17,8 +17,8 @@ import { ProductService } from './services/product.service';
       },
     ]),
     TypeOrmModule.forFeature([
-      ProductEntity,
-      CategoryEntity
+      CategoryEntity,
+      ProductEntity
     ]),
   ],
   controllers: [ProductController, CategoryController],

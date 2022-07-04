@@ -49,6 +49,11 @@ export class ProductController {
     return await this.productService.productList();
   }
 
+  @Get(':id')
+  async Product(@Param('id', new ParseIntPipe()) id: number): Promise<ProductVo> {
+    return await this.productService.getProductById(id);
+  }
+
   @Get('page')
   async ProductListPage(@Query() ProductReqDto: ProductReqDto): Promise<ProductListVo> {
     return await this.productService.productListPage(ProductReqDto);
