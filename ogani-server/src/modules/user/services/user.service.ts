@@ -78,4 +78,8 @@ export class UserService {
     }
     return user;
   }
+
+  async count(): Promise<number> {
+    return await this.userRepository.count();
+  }
 }

@@ -30,7 +30,7 @@ export class ProductService {
         throw new HttpException(`${productName} already exsist`, HttpStatus.OK);
       }
     }
-    const category = this.categoryRepository.findOneOrFail({
+    const category: Promise<CategoryEntity> = this.categoryRepository.findOneOrFail({
       where: { id: categoryId },
       relations: ['products']
     });
