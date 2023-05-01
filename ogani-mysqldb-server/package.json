@@ -1,0 +1,13 @@
+{
+  "name": "ogani-mysqldb-server",
+  "version": "0.0.1",
+  "description": "",
+  "author": "",
+  "private": true,
+  "license": "UNLICENSED",
+  "scripts": {
+    "docker:build": "docker build -t ogani/ogani-mysqldb-server:latest .",
+    "docker:run": "docker run --rm --name ogani-mysqldb-server -d -p 3300:3306/tcp ogani/ogani-mysqldb-server:latest",
+    "docker:commit": ""
+  }
+}

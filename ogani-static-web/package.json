@@ -1,0 +1,16 @@
+{
+  "name": "static-site-host",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "http-server . --port=9003 --cors -o",
+    "docker:build": "docker build -t ogani/static-site-host-docker-image:latest .",
+    "docker:run": "docker run --rm --name ogani-static-web -p 9003:80/tcp -d ogani/static-site-host-docker-image:latest"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "http-server": "^14.1.0"
+  }
+}

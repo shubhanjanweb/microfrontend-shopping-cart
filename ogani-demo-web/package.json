@@ -1,0 +1,15 @@
+{
+  "name": "demo-bootstrap-site",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "http-server . --port=8001 -o"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "http-server": "^14.1.0",
+    "pnpm": "^7.5.0"
+  }
+}

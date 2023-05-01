@@ -1,0 +1,30 @@
+<form class="container" [formGroup]="signInForm" (ngSubmit)="onSubmit()" novalidate>
+  <div class="login-wrapper">
+    <div class="card">
+      <div class="image-block">
+        <img src="//localhost:9003/img/logo.png" alt="">
+      </div>
+      <div class="card-body">
+        <p *ngIf="msgType !== 'NONE'" class="alert" [ngClass]="msgType">
+          {{message}}
+        </p>
+        <h5 class="fw-normal mb-3 pb-3">Please sign in</h5>
+        <div class="form-outline mb-4">
+          <label class="form-label" for="floatingInput">User Name</label>
+          <input type="text" id="floatingInput" formControlName="userName" class="form-control form-control-lg">
+        </div>
+        <div class="form-outline mb-4">
+          <label class="form-label" for="floatingPassword">Password</label>
+          <input type="password" id="floatingPassword" formControlName="password" class="form-control form-control-lg">
+        </div>
+        <div class="pt-1 mb-4">
+          <button class="btn btn-dark btn-lg btn-block" type="Submit">Sign in</button>
+        </div>
+        <a class="small text-muted" href="#!">Forgot password?</a>
+        <p class="mb-5 pb-lg-2 grey-text">Don't have an account?
+          <a [routerLink]="['../signup']" routerLinkActive="active" class="grey-text">Register here</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</form>

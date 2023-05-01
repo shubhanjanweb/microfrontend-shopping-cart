@@ -1,0 +1,3 @@
+"user_name","email_id","password","full_name","mobile_number","type","photo_url"
+"admin","admin@ogani.com","$2b$10$p4DzAmoQ.0Sr6Ny2IaodtuAliIG7Fq/ntrpw1BI6BhiN8KRCCtsGC","Admin At Ogani","1234567890","admin","https://i.pravatar.cc/300"
+"shubaner","shu@gmail.com","$2b$10$x5Z9qcgvQ.GZ.DM.p09j2ewsPhoMMyYT5xblX3xnY7g2/eL/q.6Ty","Shubhanjan Banerjee","1234567890","","http://localhost:9000/user/signup"

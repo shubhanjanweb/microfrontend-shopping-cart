@@ -1,0 +1,110 @@
+version: "2"
+name: "ogani-mfe"
+services:
+
+  ogani-mysqldb-server:
+    image: mysql:5-debian
+    container_name: mysqldb-server
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment: 
+        MYSQL_ROOT_PASSWORD: root
+        MYSQL_DATABASE: "oganidb"
+        MYSQL_USER: "dbuser"
+        MYSQL_PASSWORD: "dbpassword"
+    volumes: 
+        - ./ogani-mysqldb-server/init:/docker-entrypoint-initdb.d
+    ports:
+      - 3300:3306
+
+  ogani-backend-server:
+    build: ./ogani-backend-server
+    container_name: backend-server
+    environment:
+      JWT_SECRET: "YOURSECRETKEYGOESHERE"
+      EXPIRES_IN: '1h'
+      DB_TYPE: "mysql"
+      DB_HOST: "host.docker.internal"
+      DB_PORT: "3300"
+      DB_DATABASE: "oganidb"
+      DB_USERNAME: "dbuser"
+      DB_PASSWORD: "dbpassword"
+      DB_LOGGING: true
+      DB_SYNCHRONIZE: true
+    ports:
+      - 3000:3000
+    depends_on:
+      - "ogani-mysqldb-server"
+
+  ogani-static-web:
+    build: ./ogani-static-web
+    container_name: static-web
+    ports:
+      - 9003:80
+    depends_on:
+      - "ogani-backend-server"
+  
+  ogani-shared-module-web:
+    build: ./ogani-shared-module-web
+    container_name: shared-module-web
+    ports:
+      - 9005:80
+    depends_on:
+      - "ogani-static-web"
+
+  ogani-top-header-web:
+    build: ./ogani-shared-components-web/top-header-react
+    container_name: top-header-web
+    ports:
+      - 9001:80
+    depends_on:
+      - "ogani-shared-module-web"
+
+  ogani-bottom-footer-web:
+    build: ./ogani-shared-components-web/bottom-footer-react
+    container_name: bottom-footer-web
+    ports:
+      - 9002:80
+    depends_on:
+      - "ogani-top-header-web"
+
+  ogani-payment-web:
+    build: ./ogani-payment-web
+    container_name: payment-web
+    ports:
+      - 9006:80
+    depends_on:
+      - "ogani-bottom-footer-web"
+
+  ogani-contact-web:
+    build: ./ogani-contact-web
+    container_name: contact-web
+    ports:
+      - 9007:80
+    depends_on:
+      - "ogani-payment-web"
+  
+  ogani-user-web:
+    build: ./ogani-user-web
+    container_name: user-web
+    ports:
+      - 4200:80
+    depends_on:
+      - "ogani-contact-web"
+  
+  ogani-dashboard-web:
+    build: ./ogani-dashboard-web
+    container_name: dashboard-web
+    ports:
+      - 9004:80
+    depends_on:
+      - "ogani-user-web"
+  
+  ogani-app-shell-web:
+    build: ./ogani-app-shell-web
+    container_name: app-shell-web
+    ports:
+      - 9000:80
+    depends_on:
+      - "ogani-dashboard-web"
+  

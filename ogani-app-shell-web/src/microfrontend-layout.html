@@ -1,0 +1,19 @@
+<single-spa-router>
+  <!-- <div id="preloder">
+    <div class="loader"></div>
+  </div> -->
+  <application name="@ogani/top-header"></application>
+  <route path="/dashboard">
+    <application name="@ogani/dashboard"></application>
+  </route>
+  <route path="/payment">
+    <application name="@ogani/payment"></application>
+  </route>
+  <route path="/contact">
+    <application name="@ogani/contact"></application>
+  </route>
+  <route default>
+    <application name="@ogani/user"></application>
+  </route>
+  <application name="@ogani/bottom-footer"></application>
+</single-spa-router>
